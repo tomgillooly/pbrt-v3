@@ -1,0 +1,20 @@
+Bootstrap: docker
+From: ubuntu:18.04
+
+%environment
+    PATH=$PATH:/pbrt-v3/build
+
+%post
+    apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        git \
+        build-essential \
+        cmake
+
+    git clone --recursive https://github.com/mmp/pbrt-v3.git
+    cd pbrt-v3
+    mkdir build
+    cd build
+    cmake ..
+    make
+
